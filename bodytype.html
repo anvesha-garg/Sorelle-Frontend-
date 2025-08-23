@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sorelle – Body Type Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #f8f4f0 0%, #faf7f5 100%);
+      margin: 0;
+      color: #2c2423;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+      padding: 1.5rem 0;
+      border-bottom: 2px solid rgba(212, 165, 116, 0.2);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #d4a574 0%, #b8956a 50%, #a67c52 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: #6b5b73;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover {
+      color: #2c2423;
+      background: rgba(212, 165, 116, 0.1);
+      transform: translateY(-2px);
+    }
+
+    nav a[href="bodytype.html"] {
+      background: linear-gradient(135deg, #d4a574, #b8956a);
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(212, 165, 116, 0.3);
+    }
+
+    .main-section {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 3rem;
+      box-shadow: 0 8px 32px rgba(212, 165, 116, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #2c2423;
+      text-align: center;
+    }
+
+    .section-description {
+      font-size: 1.2rem;
+      color: #6b5b73;
+      text-align: center;
+      margin-bottom: 3rem;
+      font-weight: 300;
+    }
+
+    .body-types {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 8px 32px rgba(212, 165, 116, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(212, 165, 116, 0.2);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .card h3 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #2c2423;
+      margin: 0;
+    }
+
+    .body-type-visual {
+      width: 100px;
+      height: 140px;
+      position: relative;
+      background: linear-gradient(135deg, #f5f1ec 0%, #f8f4f0 100%);
+      border-radius: 15px;
+      border: 3px solid #d4a574;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(212, 165, 116, 0.2);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .body-silhouette {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    /* Fallback SVG silhouettes when images don't load */
+    .pear-silhouette {
+      background: linear-gradient(135deg, #e8b4b8, #d4a574);
+      clip-path: polygon(40% 0%, 60% 0%, 70% 30%, 80% 60%, 85% 100%, 15% 100%, 20% 60%, 30% 30%);
+    }
+
+    .apple-silhouette {
+      background: linear-gradient(135deg, #a8b5a0, #c7b8d4);
+      clip-path: polygon(30% 0%, 70% 0%, 85% 40%, 80% 70%, 60% 100%, 40% 100%, 20% 70%, 15% 40%);
+    }
+
+    .hourglass-silhouette {
+      background: linear-gradient(135deg, #d4a574, #b8956a);
+      clip-path: polygon(40% 0%, 60% 0%, 70% 25%, 55% 50%, 70% 75%, 60% 100%, 40% 100%, 30% 75%, 45% 50%, 30% 25%);
+    }
+
+    .rectangle-silhouette {
+      background: linear-gradient(135deg, #c7b8d4, #e8b4b8);
+      clip-path: polygon(45% 0%, 55% 0%, 58% 100%, 42% 100%);
+    }
+
+    .inverted-silhouette {
+      background: linear-gradient(135deg, #a8b5a0, #d4a574);
+      clip-path: polygon(20% 0%, 80% 0%, 85% 30%, 70% 60%, 60% 100%, 40% 100%, 30% 60%, 15% 30%);
+    }
+
+    .plus-points {
+      background: linear-gradient(135deg, #fef8f3 0%, #fdf6f0 100%);
+      border-left: 4px solid #d4a574;
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #2c2423;
+    }
+
+    .styling-tips {
+      margin: 1.5rem 0;
+      color: #6b5b73;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .clothing-examples {
+      margin-top: 2rem;
+    }
+
+    .clothing-category {
+      margin-bottom: 1.5rem;
+    }
+
+    .category-title {
+      font-weight: 600;
+      color: #a67c52;
+      margin-bottom: 0.8rem;
+      font-size: 1.1rem;
+    }
+
+    .clothing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+
+    .clothing-item {
+      background: linear-gradient(135deg, #c7b8d4, #a8b5a0);
+      color: white;
+      padding: 0.8rem 1rem;
+      border-radius: 15px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-align: center;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      transition: all 0.2s ease;
+    }
+
+    .clothing-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+
+    /* Body type specific colors */
+    .pear .clothing-item { background: linear-gradient(135deg, #e8b4b8, #d4a574); }
+    .apple .clothing-item { background: linear-gradient(135deg, #a8b5a0, #c7b8d4); }
+    .hourglass .clothing-item { background: linear-gradient(135deg, #d4a574, #b8956a); }
+    .rectangle .clothing-item { background: linear-gradient(135deg, #c7b8d4, #e8b4b8); }
+    .inverted .clothing-item { background: linear-gradient(135deg, #a8b5a0, #d4a574); }
+
+    .do-dont-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .do-section, .dont-section {
+      padding: 1.5rem;
+      border-radius: 15px;
+    }
+
+    .do-section {
+      background: linear-gradient(135deg, #f0f8f0 0%, #e8f5e8 100%);
+      border-left: 4px solid #a8b5a0;
+    }
+
+    .dont-section {
+      background: linear-gradient(135deg, #fdf0f0 0%, #f8e8e8 100%);
+      border-left: 4px solid #e8b4b8;
+    }
+
+    .do-dont-title {
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .do-dont-list {
+      list-style: none;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .do-dont-list li {
+      margin-bottom: 0.5rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .do-section li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #a8b5a0;
+      font-weight: bold;
+    }
+
+    .dont-section li::before {
+      content: "✗";
+      position: absolute;
+      left: 0;
+      color: #e8b4b8;
+      font-weight: bold;
+    }
+
+    footer {
+      margin: 3rem 0 1rem;
+      color: #8a7c7c;
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid rgba(212, 165, 116, 0.2);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+
+      header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .main-section {
+        padding: 2rem 1.5rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .card-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+      }
+
+      .do-dont-section {
+        grid-template-columns: 1fr;
+      }
+
+      .clothing-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">Sorelle</div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="upload.html">Upload & Predict</a>
+        <a href="analysis.html">Colour Analysis</a>
+        <a href="bodytype.html">Body Type Guide</a>
+        <a href="occasion.html">Occasion Styling</a>
+      </nav>
+    </header>
+
+    <section class="main-section">
+      <h2 class="section-title">👗 Body Type Guide</h2>
+      <p class="section-description">Every body is a masterpiece 💖. Here's how to highlight your best features and style with confidence:</p>
+
+      <div class="body-types">
+        <!-- Pear Shape -->
+        <div class="card pear">
+          <div class="card-header">
+            <div class="body-type-visual">
+              <img src="pear.png" alt="Pear body shape silhouette" class="body-silhouette" onerror="this.style.display='none'; this.parentNode.className += ' pear-silhouette';">
+            </div>
+            <div>
+              <h3>🍐 Pear Shape</h3>
+              <div class="plus-points">✨ Strong hips & thighs that symbolize femininity and grace.</div>
+            </div>
+          </div>
+          
+          <p class="styling-tips">Balance your silhouette with structured tops, statement necklaces, and detailed upper garments that draw attention upward.</p>
+          
+          <div class="clothing-examples">
+            <div class="clothing-category">
+              <div class="category-title">👚 Perfect Tops</div>
+              <div class="clothing-grid">
+                <div class="clothing-item">Structured Blazers</div>
+                <div class="clothing-item">Boat Neck Tops</div>
+                <div class="clothing-item">Statement Sleeves</div>
+                <div class="clothing-item">Embellished Blouses</div>
+              </div>
+            </div>
+            
+            <div class="clothing-category">
+              <div class="category-title">👗 Flattering Bottoms</div>
+              <div class="clothing-grid">
+                <div class="clothing-item">A-Line Skirts</div>
+                <div class="clothing-item">Bootcut Jeans</div>
+                <div class="clothing-item">Wide-Leg Pants</div>
+                <div class="clothing-item">Dark-Wash Denim</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="do-dont-section">
+            <div class="do-section">
+              <div class="do-dont-title">💚 Do</div>
+              <ul class="do-dont-list">
+                <li>Add volume to shoulders</li>
+                <li>Wear bold patterns on top</li>
+                <li>Choose structured jackets</li>
+                <li>Opt for statement jewelry</li>
+              </ul>
+            </div>
+            <div class="dont-section">
+              <div class="do-dont-title">💗 Avoid</div>
+              <ul class="do-dont-list">
+                <li>Tight-fitting bottoms</li>
+                <li>Hip pockets</li>
+                <li>Clingy fabrics below waist</li>
+                <li>Low-rise pants</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Apple Shape -->
+        <div class="card apple">
+          <div class="card-header">
+            <div class="body-type-visual">
+              <img src="apple.png" alt="Apple body shape silhouette" class="body-silhouette" onerror="this.style.display='none'; this.parentNode.className += ' apple-silhouette';">
+            </div>
+            <div>
+              <h3>🍎 Apple Shape</h3>
+              <div class="plus-points">✨ Gorgeous legs and a naturally radiant upper body that shines in bold looks.</div>
+            </div>
+          </div>
+          
+          <p class="styling-tips">Show off those amazing legs while creating a defined waistline with flowy fabrics and strategic layering.</p>
+          
+          <div class="clothing-examples">
+            <div class="clothing-category">
+              <div class="category-title">👚 Flattering Tops</div>
+              <div class="clothing-grid">
+                <div class="clothing-item">V-Neck Blouses</div>
+                <div class="clothing-item">Wrap Tops</div>
+                <div class="clothing-item">Tunic Styles</div>
+                <div class="clothing-item">Flowy Cardigans</div>
+              </div>
+            </div>
+            
+            <div class="clothing-category">
+              <div class="category-title">👗 Perfect Dresses</div>
+              <div class="clothing-grid">
+                <div class="clothing-item">Empire Waist</div>
+                <div class="clothing-item">A-Line Dresses</div>
+                <div class="clothing-item">Wrap Dresses</div>
+                <div class="clothing-item">Shift Dresses</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="do-dont-section">
+            <div class="do-section">
+              <div class="do-dont-title">💚 Do</div>
+              <ul class="do-dont-list">
+                <li>Show off your legs</li>
+                <li>Create vertical lines</li>
+                <li>Choose flowy fabrics</li>
+                <li>Wear open necklines</li>
+              </ul>
+            </div>
+            <div class="dont-section">
+              <div class="do-dont-title">💗 Avoid</div>
+              <ul class="do-dont-list">
+                <li>Tight-fitting tops</li>
+                <li>Wide belts at waist</li>
+                <li>Cropped jackets</li>
+                <li>Busy patterns on torso</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hourglass -->
+        <div class="card hourglass">
+          <div class="card-header">
+            <div class="body-type-visual">
+              <img src="hourglass.png" alt="Hourglass body shape silhouette" class="body-silhouette" onerror="this.style.display='none'; this.parentNode.className += ' hourglass-silhouette';">
+            </div>
+            <div>
+              <h3>⏳ Hourglass</h3>
+              <div class="plus-points">✨ Naturally balanced curves that exude elegance and timeless beauty.</div>
+            </div>
+          </div>
+          
+          <p class="styling-tips">Embrace your curves with fitted silhouettes that highlight your natural waistline and balanced proportions.</p>
+          
+          <div class="clothing-examples">
+            <div class="clothing-category">
+              <div class="category-title">👗 Perfect Fits</div>
+              <div class="clothing-grid">
+                <div class="clothing-item">Wrap Dresses</div>
+                <div class="clothing-item">Bodycon Styles</div>
+                <div class="clothing-item">Fit & Flare</div>
+                <div class="clothing-item">Pencil Skirts</div>
+              </div>
+            </div>
+            
+            <div class="clothing-category">
+              <div class="category-title">👚 Stunning Tops</div>
+              <div class="clothing-grid">
+                <div class="clothing-item">Fitted Blouses</div>
+                <div class="clothing-item">Sweater Sets</div>
+                <div class="clothing-item">Tailored Jackets</div>
+                <div class="clothing-item">Belted Styles</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="do-dont-section">
+            <div class="do-section">
+              <div class="do-dont-title">💚 Do</div>
+              <ul class="do-dont-list">
+                <li>Accentuate your waist</li>
+                <li>Choose fitted silhouettes</li>
+                <li>Wear belts strategically</li>
+                <li>Show off your curves</li>
+              </ul>
+            </div>
+            <div class="dont-section">
+              <div class="do-dont-title">💗 Avoid</div>
+              <ul class="do-dont-list">
+                <li>Oversized, boxy clothes</li>
+                <li>Shapeless garments</li>
+                <li>High necklines only</li>
+                <li>Hiding your waistline</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rectangle -->
+        <div class="card rectangle">
+          <div class="card-header">
+            <div class="body-type-visual">
+              <img src="rectangle.png" alt="Rectangle body shape silhouette" class="body-silhouette" onerror="this.style.display='none'; this.parentNode.className += ' rectangle-silhouette';">
+            </div>
+            <div>
+              <h3>🟫 Rectangle</h3>
+              <div class="plus-points">✨ Sleek, athletic frame that rocks modern minimalist styles.</div>
+            </div>
+          </div>
+          
+          <p class="styling-tips">Create curves and definition with strategic layering, textures, and details that add visual interest to your silhouette.</p>
+          
+          <div class="clothing-examples">
+            <div class="clothing-category">
+              <div class="category-title">👚 Shape-Creating Tops</div>
+              <div class="clothing-grid">
+                <div class="clothing-item">Peplum Styles</div>
+                <div class="clothing-item">Ruffled Blouses</div>
+                <div class="clothing-item">Cropped Jackets</div>
+                <div class="clothing-item">Layered Looks</div>
+              </div>
+            </div>
+            
+            <div class="clothing-category">
+              <div class="category-title">👗 Curve-Enhancing Pieces</div>
+              <div class="clothing-grid">
+                <div class="clothing-item">Belted Dresses</div>
+                <div class="clothing-item">Tiered Skirts</div>
+                <div class="clothing-item">Textured Fabrics</div>
+                <div class="clothing-item">Color Blocking</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="do-dont-section">
+            <div class="do-section">
+              <div class="do-dont-title">💚 Do</div>
+              <ul class="do-dont-list">
+                <li>Add texture and layers</li>
+                <li>Create curves with belts</li>
+                <li>Try horizontal stripes</li>
+                <li>Experiment with volume</li>
+              </ul>
+            </div>
+            <div class="dont-section">
+              <div class="do-dont-title">💗 Avoid</div>
+              <ul class="do-dont-list">
+                <li>Too many straight lines</li>
+                <li>Boxy, shapeless cuts</li>
+                <li>All-one-color outfits</li>
+                <li>Minimal styling</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inverted Triangle -->
+        <div class="card inverted">
+          <div class="card-header">
+            <div class="body-type-visual">
+              <img src="inverted.png" alt="Inverted Triangle body shape silhouette" class="body-silhouette" onerror="this.style.display='none'; this.parentNode.className += ' inverted-silhouette';">
+            </div>
+            <div>
+              <h3>🔺 Inverted Triangle</h3>
+              <div class="plus-points">✨ Strong shoulders that give power, presence, and bold confidence.</div>
+            </div>
+          </div>
+          
+          <p class="styling-tips">Balance your silhouette by adding volume to your lower half while softening your shoulder line with flowy fabrics.</p>
+          
+          <div class="clothing-examples">
+            <div class="clothing-category">
+              <div class="category-title">👚 Softening Tops</div>
+              <div class="clothing-grid">
+                <div class="clothing-item">Scoop Necklines</div>
+                <div class="clothing-item">Soft Cardigans</div>
+                <div class="clothing-item">Flowy Blouses</div>
+                <div class="clothing-item">V-Neck Styles</div>
+              </div>
+            </div>
+            
+            <div class="clothing-category">
+              <div class="category-title">👗 Volume-Adding Bottoms</div>
+              <div class="clothing-grid">
+                <div class="clothing-item">Wide-Leg Pants</div>
+                <div class="clothing-item">A-Line Skirts</div>
+                <div class="clothing-item">Flare Jeans</div>
+                <div class="clothing-item">Pleated Styles</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="do-dont-section">
+            <div class="do-section">
+              <div class="do-dont-title">💚 Do</div>
+              <ul class="do-dont-list">
+                <li>Add volume to hips</li>
+                <li>Choose soft fabrics</li>
+                <li>Wear detailed bottoms</li>
+                <li>Balance proportions</li>
+              </ul>
+            </div>
+            <div class="dont-section">
+              <div class="do-dont-title">💗 Avoid</div>
+              <ul class="do-dont-list">
+                <li>Shoulder pads</li>
+                <li>Boat necklines</li>
+                <li>Tight skinny jeans</li>
+                <li>Structured blazers</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>Made with 💖 by Anvesha • © 2025 Sorelle</footer>
+  </div>
+</body>
+</html>

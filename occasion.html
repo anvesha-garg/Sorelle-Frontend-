@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sorelle – Occasion Styling</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #f8f4f0 0%, #faf7f5 100%);
+      margin: 0;
+      color: #2c2423;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+      padding: 1.5rem 0;
+      border-bottom: 2px solid rgba(212, 165, 116, 0.2);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #d4a574 0%, #b8956a 50%, #a67c52 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: #6b5b73;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover {
+      color: #2c2423;
+      background: rgba(212, 165, 116, 0.1);
+      transform: translateY(-2px);
+    }
+
+    nav a[href="occasion.html"] {
+      background: linear-gradient(135deg, #d4a574, #b8956a);
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(212, 165, 116, 0.3);
+    }
+
+    .main-section {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 3rem;
+      box-shadow: 0 8px 32px rgba(212, 165, 116, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #2c2423;
+      text-align: center;
+    }
+
+    .section-description {
+      font-size: 1.2rem;
+      color: #6b5b73;
+      text-align: center;
+      margin-bottom: 3rem;
+      font-weight: 300;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 3rem;
+    }
+
+    .occasions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 8px 32px rgba(212, 165, 116, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(212, 165, 116, 0.2);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .card.work::before { background: linear-gradient(90deg, #a67c52, #d4a574); }
+    .card.casual::before { background: linear-gradient(90deg, #a8b5a0, #c7b8d4); }
+    .card.party::before { background: linear-gradient(90deg, #e8b4b8, #d4a574); }
+    .card.date::before { background: linear-gradient(90deg, #c7b8d4, #e8b4b8); }
+    .card.festive::before { background: linear-gradient(90deg, #d4a574, #b8956a); }
+    .card.beach::before { background: linear-gradient(90deg, #a8b5a0, #d4a574); }
+    .card.brunch::before { background: linear-gradient(90deg, #e8b4b8, #c7b8d4); }
+    .card.club::before { background: linear-gradient(90deg, #a67c52, #e8b4b8); }
+    .card.shopping::before { background: linear-gradient(90deg, #c7b8d4, #a8b5a0); }
+    .card.travel::before { background: linear-gradient(90deg, #b8956a, #d4a574); }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .occasion-icon {
+      font-size: 2.5rem;
+      padding: 0.75rem;
+      background: linear-gradient(135deg, #f5f1ec 0%, #f8f4f0 100%);
+      border-radius: 15px;
+      border: 2px solid #d4a574;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 80px;
+      height: 80px;
+      box-shadow: 0 4px 12px rgba(212, 165, 116, 0.2);
+    }
+
+    .card h3 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #2c2423;
+      margin: 0;
+    }
+
+    .card-subtitle {
+      font-style: italic;
+      color: #6b5b73;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .style-section {
+      margin: 1.5rem 0;
+    }
+
+    .style-title {
+      font-weight: 600;
+      color: #a67c52;
+      margin-bottom: 0.8rem;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .body-type-grid {
+      background: linear-gradient(135deg, #fef8f3 0%, #fdf6f0 100%);
+      border-left: 4px solid #d4a574;
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      margin: 1rem 0;
+    }
+
+    .body-type-grid ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .body-type-grid li {
+      margin-bottom: 0.8rem;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .body-type-grid li::before {
+      content: "✨";
+      position: absolute;
+      left: 0;
+      color: #d4a574;
+      font-weight: bold;
+    }
+
+    .body-type-grid li strong {
+      color: #a67c52;
+    }
+
+    .makeup-section {
+      background: linear-gradient(135deg, #f0f8f0 0%, #e8f5e8 100%);
+      border-left: 4px solid #a8b5a0;
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      margin: 1rem 0;
+    }
+
+    .makeup-section ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .makeup-section li {
+      margin-bottom: 0.6rem;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.95rem;
+    }
+
+    .makeup-section li::before {
+      content: "💄";
+      position: absolute;
+      left: 0;
+    }
+
+    .jewelry-section {
+      background: linear-gradient(135deg, #fdf0f0 0%, #f8e8e8 100%);
+      border-left: 4px solid #e8b4b8;
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .tip-highlight {
+      background: linear-gradient(135deg, #c7b8d4, #a8b5a0);
+      color: white;
+      padding: 0.8rem 1.2rem;
+      border-radius: 15px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-top: 1rem;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      margin: 3rem 0 1rem;
+      color: #8a7c7c;
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid rgba(212, 165, 116, 0.2);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+
+      header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .main-section {
+        padding: 2rem 1.5rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .occasions {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .card-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">Sorelle</div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="upload.html">Upload & Predict</a>
+        <a href="analysis.html">Colour Analysis</a>
+        <a href="bodytype.html">Body Type Guide</a>
+        <a href="occasion.html">Occasion Styling</a>
+      </nav>
+    </header>
+
+    <section class="main-section">
+      <h2 class="section-title">🌟 Occasion Styling</h2>
+      <p class="section-description">Every occasion is a chance to glow ✨. Sorelle tailors <strong>dress styles, makeup, jewellery</strong>, and <strong>confidence notes</strong> for <em>your body type & skin tone</em>.</p>
+
+      <div class="occasions">
+        <!-- Work -->
+        <div class="card work">
+          <div class="card-header">
+            <div class="occasion-icon">💼</div>
+            <div>
+              <h3>Work / Formal</h3>
+              <div class="card-subtitle">Polished, powerful, and elegant.</div>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">👗 For Body Types:</div>
+            <div class="body-type-grid">
+              <ul>
+                <li><strong>Hourglass:</strong> Pencil skirts + fitted blazers (balance curves).</li>
+                <li><strong>Pear:</strong> Wide-leg trousers (elongate your gorgeous legs).</li>
+                <li><strong>Apple:</strong> Structured A-line dresses (confidence + comfort).</li>
+                <li><strong>Rectangle:</strong> Peplum tops (create definition).</li>
+                <li><strong>Inverted Triangle:</strong> Bootcut pants (balance shoulders).</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">💄 Makeup by Skin Tone:</div>
+            <div class="makeup-section">
+              <ul>
+                <li><strong>Fair:</strong> Light matte base, peach blush, nude lips.</li>
+                <li><strong>Medium:</strong> Warm beige foundation, bronze shadow, coral lips.</li>
+                <li><strong>Deep:</strong> Rich matte base, gold highlight, wine lipstick.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">💎 Jewellery:</div>
+            <div class="jewelry-section">
+              Minimalist studs, sleek watches, thin chains.
+            </div>
+          </div>
+        </div>
+
+        <!-- Casual -->
+        <div class="card casual">
+          <div class="card-header">
+            <div class="occasion-icon">☕</div>
+            <div>
+              <h3>Casual / Everyday</h3>
+              <div class="card-subtitle">Relaxed, playful, chic.</div>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">👗 For Body Types:</div>
+            <div class="body-type-grid">
+              <ul>
+                <li><strong>Hourglass:</strong> Wrap tops + skinny jeans.</li>
+                <li><strong>Pear:</strong> A-line skirts with crop jackets.</li>
+                <li><strong>Apple:</strong> Empire-waist tunics + jeggings.</li>
+                <li><strong>Rectangle:</strong> Rompers + cinched belts.</li>
+                <li><strong>Inverted Triangle:</strong> V-neck tees + flared pants.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">💄 Makeup by Skin Tone:</div>
+            <div class="makeup-section">
+              <ul>
+                <li><strong>Fair:</strong> Soft pink blush, tinted gloss.</li>
+                <li><strong>Medium:</strong> Warm coral blush, nude gloss.</li>
+                <li><strong>Deep:</strong> Berry blush, chocolate gloss.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">💎 Jewellery:</div>
+            <div class="jewelry-section">
+              Layered necklaces, hoops, casual charms.
+            </div>
+          </div>
+        </div>
+
+        <!-- Party -->
+        <div class="card party">
+          <div class="card-header">
+            <div class="occasion-icon">🎉</div>
+            <div>
+              <h3>Party / Night Out</h3>
+              <div class="card-subtitle">All eyes on you, darling.</div>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">👗 For Body Types:</div>
+            <div class="body-type-grid">
+              <ul>
+                <li><strong>Hourglass:</strong> Bodycon + bold belts.</li>
+                <li><strong>Pear:</strong> Off-shoulder sparkle tops.</li>
+                <li><strong>Apple:</strong> Flowy skirts, plunge necklines.</li>
+                <li><strong>Rectangle:</strong> Sequin jumpsuits for shape.</li>
+                <li><strong>Inverted Triangle:</strong> Halter dresses.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">💄 Makeup by Skin Tone:</div>
+            <div class="makeup-section">
+              <ul>
+                <li><strong>Fair:</strong> Icy silver eyeshadow, soft pink gloss.</li>
+                <li><strong>Medium:</strong> Copper shadow, glossy coral lips.</li>
+                <li><strong>Deep:</strong> Bold gold highlighter, plum lips.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">💎 Jewellery:</div>
+            <div class="jewelry-section">
+              Statement earrings, chokers, cocktail rings.
+            </div>
+          </div>
+        </div>
+
+        <!-- Date -->
+        <div class="card date">
+          <div class="card-header">
+            <div class="occasion-icon">❤️</div>
+            <div>
+              <h3>Date Night</h3>
+              <div class="card-subtitle">Romantic, soft, alluring.</div>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">👗 For Body Types:</div>
+            <div class="body-type-grid">
+              <ul>
+                <li><strong>Hourglass:</strong> Wrap dresses that hug curves.</li>
+                <li><strong>Pear:</strong> A-line skirts + sweetheart necklines.</li>
+                <li><strong>Apple:</strong> Flowy maxi with side slit.</li>
+                <li><strong>Rectangle:</strong> Off-shoulder ruffles for volume.</li>
+                <li><strong>Inverted Triangle:</strong> Bias-cut dresses.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">💄 Makeup by Skin Tone:</div>
+            <div class="makeup-section">
+              <ul>
+                <li><strong>Fair:</strong> Soft blush, rose lipstick.</li>
+                <li><strong>Medium:</strong> Coral blush, glossy peach lips.</li>
+                <li><strong>Deep:</strong> Burgundy lipstick, deep berry blush.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">💎 Jewellery:</div>
+            <div class="jewelry-section">
+              Pearl studs, dainty pendants, charm anklets.
+            </div>
+          </div>
+        </div>
+
+        <!-- Festive -->
+        <div class="card festive">
+          <div class="card-header">
+            <div class="occasion-icon">🌸</div>
+            <div>
+              <h3>Festive / Wedding</h3>
+              <div class="card-subtitle">Glorious, regal, unforgettable.</div>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">👗 For Body Types:</div>
+            <div class="body-type-grid">
+              <ul>
+                <li><strong>Hourglass:</strong> Sarees with ornate belts, lehengas with blouses.</li>
+                <li><strong>Pear:</strong> A-line anarkalis, layered lehengas.</li>
+                <li><strong>Apple:</strong> Empire-waist gowns, sharara suits.</li>
+                <li><strong>Rectangle:</strong> Heavy dupattas, embroidered jackets.</li>
+                <li><strong>Inverted Triangle:</strong> Flared lehengas with boat neck blouses.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">💄 Makeup by Skin Tone:</div>
+            <div class="makeup-section">
+              <ul>
+                <li><strong>Fair:</strong> Pastel pink shadows, ruby lipstick.</li>
+                <li><strong>Medium:</strong> Emerald green kohl, bronze lips.</li>
+                <li><strong>Deep:</strong> Gold shimmer, deep maroon lips.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">💎 Jewellery:</div>
+            <div class="jewelry-section">
+              Polki chokers, temple jewellery, heavy jhumkas.
+            </div>
+          </div>
+        </div>
+
+        <!-- Beach Day -->
+        <div class="card beach">
+          <div class="card-header">
+            <div class="occasion-icon">🌊</div>
+            <div>
+              <h3>Beach Day</h3>
+              <div class="card-subtitle">Breezy, sun-protected, carefree chic.</div>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">👗 For Body Types:</div>
+            <div class="body-type-grid">
+              <ul>
+                <li><strong>Hourglass:</strong> High-waist bikinis + sarongs – show curves elegantly.</li>
+                <li><strong>Pear:</strong> Bright halter tops + darker bottoms – balance shape.</li>
+                <li><strong>Apple:</strong> Flowy kaftans, tankinis – comfy yet glam.</li>
+                <li><strong>Rectangle:</strong> Ruffled bikinis, cut-out one-pieces – add volume.</li>
+                <li><strong>Inverted Triangle:</strong> Bandeau tops + flared bottoms – soften shoulders.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">💄 Makeup by Skin Tone:</div>
+            <div class="makeup-section">
+              <ul>
+                <li><strong>Fair:</strong> Dewy SPF, tinted balm, waterproof mascara.</li>
+                <li><strong>Medium:</strong> Sunscreen glow, peach tint, glossy coral lips.</li>
+                <li><strong>Deep:</strong> Bronzer + highlight, cocoa gloss, waterproof liner.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">💎 Jewellery & Styling:</div>
+            <div class="jewelry-section">
+              Shell anklets, straw hats, oversized shades.
+            </div>
+            <div class="tip-highlight">
+              💡 Tip: Beach waves + SPF lip balm → goddess mode. 🌞
+            </div>
+          </div>
+        </div>
+
+        <!-- Brunch -->
+        <div class="card brunch">
+          <div class="card-header">
+            <div class="occasion-icon">🧺</div>
+            <div>
+              <h3>Picnic / Brunch</h3>
+              <div class="card-subtitle">Playful, soft, sunny vibes.</div>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">👗 For Body Types:</div>
+            <div class="body-type-grid">
+              <ul>
+                <li><strong>Hourglass:</strong> Wrap dresses with florals.</li>
+                <li><strong>Pear:</strong> A-line skirts + puff sleeves.</li>
+                <li><strong>Apple:</strong> Empire-cut cotton dresses.</li>
+                <li><strong>Rectangle:</strong> Ruffled maxi skirts + crop tops.</li>
+                <li><strong>Inverted Triangle:</strong> Off-shoulder tops + flowy skirts.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">💄 Makeup by Skin Tone:</div>
+            <div class="makeup-section">
+              <ul>
+                <li><strong>Fair:</strong> Peach blush, nude gloss.</li>
+                <li><strong>Medium:</strong> Coral blush, warm brown eyes.</li>
+                <li><strong>Deep:</strong> Berry blush, cocoa lips, golden lids.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">💎 Jewellery & Styling:</div>
+            <div class="jewelry-section">
+              Dainty pendants, straw bags, espadrilles.
+            </div>
+            <div class="tip-highlight">
+              💡 Tip: Braided hair + pastel nails = picnic-ready 💐
+            </div>
+          </div>
+        </div>
+
+        <!-- Clubbing -->
+        <div class="card club">
+          <div class="card-header">
+            <div class="occasion-icon">🕺</div>
+            <div>
+              <h3>Clubbing / Night Out</h3>
+              <div class="card-subtitle">Bold, electrifying, spotlight energy.</div>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">👗 For Body Types:</div>
+            <div class="body-type-grid">
+              <ul>
+                <li><strong>Hourglass:</strong> Metallic bodycon.</li>
+                <li><strong>Pear:</strong> Sequin tops + leather pants.</li>
+                <li><strong>Apple:</strong> Sparkly wrap dresses.</li>
+                <li><strong>Rectangle:</strong> Corset tops + mini skirts.</li>
+                <li><strong>Inverted Triangle:</strong> One-shoulder dresses + thigh slit.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">💄 Makeup by Skin Tone:</div>
+            <div class="makeup-section">
+              <ul>
+                <li><strong>Fair:</strong> Neon liner, glitter gloss.</li>
+                <li><strong>Medium:</strong> Bronze smokey eyes, coral matte lips.</li>
+                <li><strong>Deep:</strong> Gold shimmer eyes, bold plum lips.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">💎 Jewellery & Styling:</div>
+            <div class="jewelry-section">
+              Chunky hoops, glitter clutches, stilettos.
+            </div>
+            <div class="tip-highlight">
+              💡 Tip: Sleek ponytail + highlighter pop = club queen ✨
+            </div>
+          </div>
+        </div>
+
+        <!-- Shopping -->
+        <div class="card shopping">
+          <div class="card-header">
+            <div class="occasion-icon">🛍️</div>
+            <div>
+              <h3>Shopping Day</h3>
+              <div class="card-subtitle">Trendy yet comfy, easy to try on outfits.</div>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">👗 For Body Types:</div>
+            <div class="body-type-grid">
+              <ul>
+                <li><strong>Hourglass:</strong> High-waist jeans + fitted tee.</li>
+                <li><strong>Pear:</strong> Tunics + jeggings.</li>
+                <li><strong>Apple:</strong> Loose shirt-dresses.</li>
+                <li><strong>Rectangle:</strong> Cropped hoodie + wide-leg jeans.</li>
+                <li><strong>Inverted Triangle:</strong> Flowy tops + tapered trousers.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">💄 Makeup by Skin Tone:</div>
+            <div class="makeup-section">
+              <ul>
+                <li><strong>Fair:</strong> Tinted moisturizer + rosy balm.</li>
+                <li><strong>Medium:</strong> Dewy skin + peach gloss.</li>
+                <li><strong>Deep:</strong> Warm brown eyeshadow + berry gloss.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">💎 Jewellery & Styling:</div>
+            <div class="jewelry-section">
+              Tote bags, sneakers, minimal jewellery.
+            </div>
+            <div class="tip-highlight">
+              💡 Tip: Hair in a messy bun for quick outfit trials!
+            </div>
+          </div>
+        </div>
+
+        <!-- Travel -->
+        <div class="card travel">
+          <div class="card-header">
+            <div class="occasion-icon">✈️</div>
+            <div>
+              <h3>Travel / Airport Look</h3>
+              <div class="card-subtitle">Comfortable, chic, paparazzi-ready.</div>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">👗 For Body Types:</div>
+            <div class="body-type-grid">
+              <ul>
+                <li><strong>Hourglass:</strong> Joggers + crop hoodie.</li>
+                <li><strong>Pear:</strong> Relaxed-fit pants + oversized tee.</li>
+                <li><strong>Apple:</strong> Soft joggers + longline cardigan.</li>
+                <li><strong>Rectangle:</strong> Layered tanks + bomber jacket.</li>
+                <li><strong>Inverted Triangle:</strong> V-neck sweaters + tapered joggers.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">💄 Makeup by Skin Tone:</div>
+            <div class="makeup-section">
+              <ul>
+                <li><strong>Fair:</strong> Hydrating mist, nude balm, brow gel.</li>
+                <li><strong>Medium:</strong> Dewy base, coral tint, mascara.</li>
+                <li><strong>Deep:</strong> Rich moisturizer, berry balm, soft liner.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="style-section">
+            <div class="style-title">💎 Jewellery & Styling:</div>
+            <div class="jewelry-section">
+              Crossbody bags, bucket hats, comfy sneakers.
+            </div>
+            <div class="tip-highlight">
+              💡 Tip: Layered necklaces + sunglasses = instant celeb vibes!
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      &copy; 2025 Sorelle. All rights reserved.
+    </footer>
+  </div>
+</body>
+</html>
