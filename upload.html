@@ -719,7 +719,7 @@
         const form = new FormData();
         form.append('file', currentFile);
 
-        const res = await fetch(API_URL, { 
+        const res = await fetch("https://sorelle-backen-new.hf.space/predict", { 
           method:'POST', 
           body: form 
         });
