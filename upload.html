@@ -542,26 +542,28 @@
         <h2 class="title">Upload your outfit</h2>
         <p class="muted">Drag & drop an image, or click to browse. We'll show a preview and run our AI model to predict your outfit type.</p>
 
-        <label id="dropzone" class="drop" for="fileInput">
-          <input id="fileInput" type="file" accept="image/*"/>
-          <p>Drop image here or <span>choose file</span></p>
-          <small class="muted">PNG, JPG, or JPEG recommended</small>
-        </label>
+        <form action="https://sorelle-backen-new.hf.space/predict" method="POST" enctype="multipart/form-data">
+          <label id="dropzone" class="drop" for="fileInput">
+            <input id="fileInput" type="file" accept="image/*"/>
+            <p>Drop image here or <span>choose file</span></p>
+            <small class="muted">PNG, JPG, or JPEG recommended</small>
+          </label>
 
-        <div style="margin-top: 1.5rem;">
-          <img id="preview" class="preview" alt="Preview will appear here"/>
-        </div>
+          <div style="margin-top: 1.5rem;">
+            <img id="preview" class="preview" alt="Preview will appear here"/>
+          </div>
 
-        <div class="row">
-          <button id="predictBtn" class="btn" disabled>
-            <span id="btnIcon">🔮</span>
-            <span>Predict Outfit</span>
-          </button>
-          <button id="resetBtn" class="pill" type="button">✨ Reset</button>
-          <div id="loading" class="spinner" style="display:none"></div>
-        </div>
+          <div class="row">
+            <button id="predictBtn" class="btn" disabled>
+              <span id="btnIcon">🔮</span>
+              <span>Predict Outfit</span>
+            </button>
+            <button id="resetBtn" class="pill" type="button">✨ Reset</button>
+            <div id="loading" class="spinner" style="display:none"></div>
+          </div>
 
-        <p id="error" class="error" style="display:none;"></p>
+          <p id="error" class="error" style="display:none;"></p>
+        </form>
       </section>
 
       <!-- Right: Results -->
@@ -609,7 +611,7 @@
 
   <script>
     // === Config ===
-    const API_URL = "https://sorelle-backend-anvesha-garg-1301.hf.space/predict"; // updated to Hugging Face Space
+    const API_URL = "https://sorelle-backen-new.hf.space/predict"; // updated to Hugging Face Space
 
     // === DOM ===
     const fileInput = document.getElementById('fileInput');
