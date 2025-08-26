@@ -538,7 +538,12 @@
     <footer>Made with 💖 by Anvesha • © 2025 Sorelle</footer>
   </div>
   <script>
-    const API_URL = "https://sorelle-backen-new.hf.space/predict"; // Your HF Space API endpoint
+    // Set your backend API base URL here (change to your deployed URL when needed)
+    const API_BASE_URL = "https://sorelle-backen-new.hf.space"; 
+    // Concatenate endpoint path
+    const API_URL = `${API_BASE_URL}/predict`;
+
+    // DOM Elements
     const fileInput = document.getElementById('fileInput');
     const dropzone  = document.getElementById('dropzone');
     const preview = document.getElementById('preview');
@@ -555,24 +560,23 @@
     const top2P = document.getElementById('top2Pct');
     const top2B = document.getElementById('top2Bar');
     const jsonDump = document.getElementById('jsonDump');
+
     let currentFile = null;
 
-    // --- helpers ---
-    function setLoading(on){
+    // Helpers
+    function setLoading(on) {
       loading.style.display = on ? 'inline-block' : 'none';
       predictBtn.disabled = on || !currentFile;
       document.getElementById('btnIcon').textContent = on ? '⏳' : '🔮';
     }
-    
-    function showError(msg){
+
+    function showError(msg) {
       errorEl.textContent = msg;
       errorEl.style.display = msg ? 'block' : 'none';
-      if (msg) {
-        errorEl.classList.add('fade-in');
-      }
+      if (msg) errorEl.classList.add('fade-in');
     }
 
-    function resetAll(){
+    function resetAll() {
       currentFile = null;
       fileInput.value = '';
       preview.src = '';
@@ -589,8 +593,8 @@
       top2P.textContent = '';
       top2B.style.width = '0%';
     }
-    
-    function enablePreview(file){
+
+    function enablePreview(file) {
       currentFile = file;
       const url = URL.createObjectURL(file);
       preview.src = url;
@@ -601,96 +605,95 @@
       showError('');
     }
 
-    // --- drag & drop ---
+    // Drag & drop handlers
     ['dragenter','dragover'].forEach(evt =>
       dropzone.addEventListener(evt, e => {
         e.preventDefault();
         e.stopPropagation();
         dropzone.classList.add('dragover');
-      }));
+      })
+    );
 
     ['dragleave','drop'].forEach(evt =>
       dropzone.addEventListener(evt, e => {
         e.preventDefault();
         e.stopPropagation();
         dropzone.classList.remove('dragover');
-      }));
+      })
+    );
 
     dropzone.addEventListener('drop', e => {
       const file = e.dataTransfer.files?.[0];
       if (file && file.type.startsWith('image/')) {
         enablePreview(file);
-      }
-      else {
+      } else {
         showError('Please drop an image file (PNG/JPG/JPEG).');
       }
     });
 
-    // --- file input ---
+    // File input change
     fileInput.addEventListener('change', e => {
       const file = e.target.files?.[0];
       if (file && file.type.startsWith('image/')) {
         enablePreview(file);
-      } 
-      else {
+      } else {
         showError('Please select an image file (PNG/JPG/JPEG).');
       }
     });
 
-    // --- predict ---
+    // Predict button click
     predictBtn.addEventListener('click', async () => {
       if (!currentFile) return;
-      
+
       setLoading(true);
       showError('');
       placeholder.style.display = 'none';
+
       try {
         const form = new FormData();
         form.append('file', currentFile);
+
         const res = await fetch(API_URL, {
-          method:'POST',
-          body: form});
-          if (!res.ok) {
-            throw new Error(`Server error ${res.status}: ${res.statusText}`);
+          method: 'POST',
+          body: form
+        });
+
+        if (!res.ok) {
+          throw new Error(`Server error ${res.status}: ${res.statusText}`);
         }
 
         const data = await res.json();
 
-        // Show results container and animate fade-in
         results.style.display = 'block';
         results.classList.add('fade-in');
 
-        // Helper to convert confidence to percentage string
         const pct = v => Math.round((v || 0) * 100);
 
-        // Display top1 result
         const t1 = data.top1 || {};
         top1L.textContent = t1.label || '—';
         top1P.textContent = `${pct(t1.confidence)}%`;
         setTimeout(() => { top1B.style.width = `${pct(t1.confidence)}%`; }, 100);
 
-        // Display top2 result
         const t2 = data.top2 || {};
         top2L.textContent = t2.label || '—';
         top2P.textContent = `${pct(t2.confidence)}%`;
         setTimeout(() => { top2B.style.width = `${pct(t2.confidence)}%`; }, 200);
 
-        // Display full probabilities JSON
         jsonDump.textContent = JSON.stringify(data.all_probs || data, null, 2);
 
-      } catch (err) {
-        console.error(err);
-        showError(`Prediction failed: ${err.message}. Please check if the API is running and CORS is configured.`);
-        placeholder.style.display = 'block'; 
-      } 
-      finally {
+      } catch (error) {
+        console.error(error);
+        showError(`Prediction failed: ${error.message}. Please check if the API is running and CORS is configured.`);
+        placeholder.style.display = 'block';
+      } finally {
         setLoading(false);
       }
     });
 
+    // Reset button
     resetBtn.addEventListener('click', resetAll);
 
-    // Initialize page on DOM load
+    // On DOM load
     document.addEventListener('DOMContentLoaded', () => {
       resetAll();
       console.log('✨ Sorelle Upload Page loaded successfully!');
